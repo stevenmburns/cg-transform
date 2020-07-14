@@ -9,4 +9,7 @@ test-enffcg:
 test-cg2enff:
 	sbt 'test:runMain cg.EnabledFlopUsingCGMain --backend-name verilator -fct cg.tools.cg2enff'
 
+test-cg2enff2:
+	sbt 'test:runMain cg.EnabledFlopMain --backend-name verilator -fct cg.tools.cg2enff'
+
 

@@ -8,7 +8,7 @@ reg latched_d;
    
 always @(clkinp or d) begin
   if ( !clkinp) begin
-     latched_d <= d;
+     latched_d = d;
   end
 end
 
