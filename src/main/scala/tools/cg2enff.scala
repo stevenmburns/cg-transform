@@ -80,7 +80,9 @@ Instances: Map(integrated_clock_gate -> integrated_clock_gate)
       //println( s"Found a ${s}")
       if ( enables contains "one") {
          val fexpr = loc match {
-	    case e @ WRef(name, tpe, kind, flow) => WRef(name, tpe, kind, SourceFlow)
+	    case e @ WRef(name, tpe, kind, flow) =>
+               println( s"Found REG WREF")
+	       WRef(name, tpe, kind, SourceFlow)
             case _ => expr
          }
          val new_expr = Mux( enables("one"), expr, fexpr)      
@@ -124,7 +126,7 @@ Instances: Map(integrated_clock_gate -> integrated_clock_gate)
   }
 
   def execute(state: CircuitState): CircuitState = {
-    state.circuit.foreachModule(gatherMod)
+    state.circuit foreachModule gatherMod
     println( s"Instances: ${instances}")    
     state.copy(circuit = state.circuit.map(transformMod))
   }
