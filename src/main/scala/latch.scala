@@ -38,6 +38,26 @@ class EnabledFlopUsingCG(Bits: Int = 1) extends EnabledFlopIfc(Bits) {
   }
 }
 
+class RegBuried( Bits : Int = 1) extends Module {
+   val io = IO(new Bundle {
+     val clk = Input(Clock())
+     val d = Input(UInt(Bits.W))
+     val q = Output(UInt(Bits.W))
+   })
+
+   withClockAndReset( io.clk, reset) {
+      io.q := RegNext( io.d)
+   }
+}
+
+class EnabledFlopHierUsingCG(Bits: Int = 1) extends EnabledFlopIfc(Bits) {
+  val en_clk = integrated_clock_gate( clock, io.en)
+  val m = Module(new RegBuried(Bits))
+  m.io.d := io.d
+  m.io.clk := en_clk
+  io.q := m.io.q
+}
+
 class EnabledFlop(Bits: Int = 1) extends EnabledFlopIfc(Bits) {
   io.q := RegEnable( next=io.d, enable=io.en)    
 }

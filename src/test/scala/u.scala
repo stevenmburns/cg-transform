@@ -58,3 +58,11 @@ class EnabledFlopUsingCGTest extends ChiselFlatSpec {
      } should be (true)
   }
 }
+
+class EnabledFlopHierUsingCGTest extends ChiselFlatSpec {
+  "EnabledFlopHierUsingCG" should "behave like an enabled flop" in {
+     Driver(() => new EnabledFlopHierUsingCG(), "verilator") {
+       c => new EnabledFlopIfcUnitTester(c)
+     } should be (true)
+  }
+}

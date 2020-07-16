@@ -13,3 +13,9 @@ object EnabledFlopUsingCGMain extends App {
      c => new EnabledFlopIfcUnitTester(c)
    }
 }
+
+object EnabledFlopHierUsingCGMain extends App {
+   Driver.execute(args, () => new EnabledFlopHierUsingCG()) {
+     c => new EnabledFlopIfcUnitTester(c)
+   }
+}
